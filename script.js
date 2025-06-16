@@ -1,16 +1,16 @@
 window.addEventListener('DOMContentLoaded', () => {
   const audio = document.getElementById('backgroundMusic');
+  let started = false;
 
-  function playAudioOnce() {
-    audio.play().catch(() => { });
-    document.removeEventListener('touchstart', playAudioOnce);
-    document.removeEventListener('click', playAudioOnce);
-    document.removeEventListener('scroll', playAudioOnce);
+  function playAudio() {
+    if (!started) {
+      audio.play().catch(() => { });
+      started = true;
+    }
   }
 
-  document.addEventListener('touchstart', playAudioOnce);
-  document.addEventListener('click', playAudioOnce);
-  document.addEventListener('scroll', playAudioOnce);
+  document.addEventListener('touchstart', playAudio, { once: true }); // mobile
+  document.addEventListener('mousedown', playAudio, { once: true }); // desktop
 
   // Musiqani avtomatik ijro etish va takrorlash
   function autoplayMusic() {
