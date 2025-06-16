@@ -1,22 +1,16 @@
 window.addEventListener('DOMContentLoaded', () => {
   const audio = document.getElementById('backgroundMusic');
-  let started = false;
 
   function playAudioOnce() {
-    if (!started) {
-      audio.play().catch(() => { });
-      started = true;
-      // Remove listeners after first interaction
-      document.removeEventListener('touchstart', playAudioOnce);
-      document.removeEventListener('mousedown', playAudioOnce);
-      document.removeEventListener('click', playAudioOnce);
-    }
+    audio.play().catch(() => { });
+    document.removeEventListener('touchstart', playAudioOnce);
+    document.removeEventListener('click', playAudioOnce);
+    document.removeEventListener('scroll', playAudioOnce);
   }
 
-  // Listen for any user interaction (touch, mouse, click)
   document.addEventListener('touchstart', playAudioOnce);
-  document.addEventListener('mousedown', playAudioOnce);
   document.addEventListener('click', playAudioOnce);
+  document.addEventListener('scroll', playAudioOnce);
 
   // Musiqani avtomatik ijro etish va takrorlash
   function autoplayMusic() {
